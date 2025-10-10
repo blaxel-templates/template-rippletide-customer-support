@@ -2,6 +2,7 @@ import os
 import uuid
 import httpx
 from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
 from blaxel.telemetry.span import SpanManager
 
@@ -50,7 +51,10 @@ async def handle_request(request: Request):
                     json=payload,
                 )
                 response.raise_for_status()
-                return response.json()
+                response_data = response.json()
+                # Return just the answer text as plain text instead of JSON
+                answer_text = response_data.get("answer", "No answer provided")
+                return PlainTextResponse(content=answer_text)
             except httpx.HTTPStatusError as e:
                 # Include response body for better error debugging
                 error_detail = f"{str(e)}"
