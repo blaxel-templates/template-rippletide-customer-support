@@ -75,8 +75,8 @@ async def main():
     api_key = os.getenv("BLAXEL_API_KEY")
     if not api_key:
         log_error("BLAXEL_API_KEY not found in .env file")
-        log_warning("Please add your Rippletide API key to the .env file")
-        log_warning("Contact patrick@rippletide.com or yann@rippletide.com to get an API key")
+        log_warning("Please add your Blaxel API key to the .env file")
+        log_warning("You can get one from https://app.blaxel.ai/profile/security")
         sys.exit(1)
 
     log_success("API key loaded successfully")

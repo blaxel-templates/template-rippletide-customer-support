@@ -109,9 +109,9 @@ uv sync
 
 ## ⚙️ Configuration
 
-### Step 1: Get Your Rippletide API Key
+### Step 1: Get Your Blaxel API Key
 
-Contact [patrick@rippletide.com](mailto:patrick@rippletide.com) or [yann@rippletide.com](mailto:yann@rippletide.com) to get your Rippletide API key.
+Go to https://app.blaxel.ai/profile/security to get your Blaxel API key.
 
 Once you have your API key, create a `.env` file in the project root:
 
