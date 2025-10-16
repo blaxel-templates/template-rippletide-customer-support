@@ -72,9 +72,9 @@ async def main():
     load_dotenv()
 
     # Get API key
-    api_key = os.getenv("RIPPLETIDE_API_KEY")
+    api_key = os.getenv("BLAXEL_API_KEY")
     if not api_key:
-        log_error("RIPPLETIDE_API_KEY not found in .env file")
+        log_error("BLAXEL_API_KEY not found in .env file")
         log_warning("Please add your Rippletide API key to the .env file")
         log_warning("Contact patrick@rippletide.com or yann@rippletide.com to get an API key")
         sys.exit(1)
@@ -84,7 +84,7 @@ async def main():
     # Setup API connection
     BASE_URL = "https://agent.rippletide.com/api/sdk"
     headers = {
-        "x-api-key": api_key,
+        "X-Blaxel-Api-Key": api_key,
         "Content-Type": "application/json"
     }
 

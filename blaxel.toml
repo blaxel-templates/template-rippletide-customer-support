@@ -9,4 +9,4 @@ dev = ".venv/bin/uvicorn src.main:app --reload --port 1338 --host 0.0.0.0 --loop
 
 [env]
 RIPPLETIDE_AGENT_ID = "$RIPPLETIDE_AGENT_ID"
-RIPPLETIDE_API_KEY = "${secrets.RIPPLETIDE_API_KEY}"
+BLAXEL_API_KEY = "${secrets.BLAXEL_API_KEY}"
