@@ -1,7 +1,7 @@
 import uvicorn
 from blaxel import env
 
-port = env["PORT"] or 1338
+port = env["PORT"] or 80
 host = env["HOST"] or "0.0.0.0"
 
 if __name__ == "__main__":
