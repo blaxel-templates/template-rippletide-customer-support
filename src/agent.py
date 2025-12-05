@@ -14,10 +14,10 @@ class RequestInput(BaseModel):
 @router.post("/")
 async def handle_request(request: Request):
     base_url = os.getenv("BASE_URL", "https://agent.rippletide.com/api/sdk")
-    api_key = os.getenv("RIPPLETIDE_API_KEY")
+    api_key = os.getenv("BLAXEL_API_KEY")
     body = RequestInput(**await request.json())
     if api_key is None:
-        raise HTTPException(status_code=500, detail="RIPPLETIDE_API_KEY is not set")
+        raise HTTPException(status_code=500, detail="BLAXEL_API_KEY is not set")
     agent_id = os.getenv("RIPPLETIDE_AGENT_ID")
     if agent_id is None:
         raise HTTPException(status_code=500, detail="RIPPLETIDE_AGENT_ID is not set")
@@ -32,7 +32,7 @@ async def handle_request(request: Request):
 
         # Prepare headers with API key
         headers = {
-            "x-api-key": api_key,
+            "X-Blaxel-Api-Key": api_key,
             "Content-Type": "application/json"
         }
 

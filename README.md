@@ -67,7 +67,7 @@ uv sync
 
 # Configure environment variables
 cp .env-sample .env
-# Add your RIPPLETIDE_API_KEY to .env
+# Add your BLAXEL_API_KEY to .env . You can get one from https://app.blaxel.ai/profile/security
 
 # Customize your knowledge base (optional)
 # Edit files in knowledge-base/ folder
@@ -87,9 +87,6 @@ bl chat --local template-rippletide-customer-support
 
 - **Python:** 3.10 or later
 - **[UV](https://github.com/astral-sh/uv):** An extremely fast Python package and project manager, written in Rust
-- **Rippletide API Key:** Contact [patrick@rippletide.com](mailto:patrick@rippletide.com) or [yann@rippletide.com](mailto:yann@rippletide.com) to get your API key
-  - The setup script will create your agent automatically
-  - See the [Rippletide Getting Started guide](https://sdk.rippletide.com/documentation/get_started/) for more information
 - **Blaxel Platform Setup:** Complete Blaxel setup by following the [quickstart guide](https://docs.blaxel.ai/Get-started#quickstart)
   - **[Blaxel CLI](https://docs.blaxel.ai/Get-started):** Ensure you have the Blaxel CLI installed. If not, install it globally:
     ```bash
@@ -112,14 +109,14 @@ uv sync
 
 ## ⚙️ Configuration
 
-### Step 1: Get Your Rippletide API Key
+### Step 1: Get Your Blaxel API Key
 
-Contact [patrick@rippletide.com](mailto:patrick@rippletide.com) or [yann@rippletide.com](mailto:yann@rippletide.com) to get your Rippletide API key.
+Go to https://app.blaxel.ai/profile/security to get your Blaxel API key.
 
 Once you have your API key, create a `.env` file in the project root:
 
 ```env
-RIPPLETIDE_API_KEY=your-api-key-here
+BLAXEL_API_KEY=your-api-key-here
 ```
 
 ### Step 2: Customize Your Knowledge Base
@@ -152,7 +149,7 @@ The script will:
 After running the setup script, add the generated Agent ID to your `.env` file:
 
 ```env
-RIPPLETIDE_API_KEY=your-api-key-here
+BLAXEL_API_KEY=your-api-key-here
 RIPPLETIDE_AGENT_ID=your-agent-id-here
 ```
 
@@ -235,10 +232,13 @@ This command uses your code and the configuration files under the `.blaxel` dire
 
 ## ❓ Troubleshooting
 
+## Documentation
+See the [Rippletide Getting Started guide](https://sdk.rippletide.com/documentation/get_started/) for more information
+
 ### Common Issues
 
 1. **Setup Script Issues**:
-   - Ensure `RIPPLETIDE_API_KEY` is set in your `.env` file before running `setup.py`
+   - Ensure `BLAXEL_API_KEY` is set in your `.env` file before running `setup.py`
    - Check that all JSON files in `knowledge-base/` are valid (use a JSON validator)
    - If setup fails partially, you may need to delete the agent in Rippletide and run setup again
    - Review the colored console output for specific error messages
