@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "asgi-correlation-id>=4.3.4",
-    "blaxel[telemetry]==0.2.30",
+    "blaxel[telemetry]==0.2.32",
     "fastapi[standard]>=0.115.12",
     "httpx>=0.27.0",
     "markdown>=3.8.2",
