@@ -1,0 +1,92 @@
+{
+  "state_predicate": {
+    "question_to_evaluate": "It seems that I'm not able to answer your request.",
+    "re_evaluate": true,
+    "transition_kind": "end"
+  },
+  "tags": {},
+  "agent_purpose": "You are a professional customer support agent. Your role is to help customers with their inquiries, answer questions about products and services, and resolve issues efficiently and empathetically.",
+  "qa_pairs": [
+    {
+      "question": "What are the operating hours?",
+      "answer": "Our customer support team is available Monday through Friday, 9 AM to 6 PM EST. For urgent issues outside these hours, you can submit a support ticket and we'll respond within 24 hours."
+    },
+    {
+      "question": "How can I track my order?",
+      "answer": "You can track your order by logging into your account and visiting the 'Order History' section. You'll find a tracking number for each shipped order. Alternatively, you can use the tracking link sent to your email."
+    },
+    {
+      "question": "What is the return policy?",
+      "answer": "Our return policy is 30 days from the date of purchase. You can return the item for a full refund or exchange. Please note that some items are excluded from the return policy."
+    },
+    {
+      "question": "What are the operating hours of the customer support team?",
+      "answer": "Monday through Friday from 9 AM to 6 PM EST."
+    },
+    {
+      "question": "Is the customer support team available on weekends?",
+      "answer": "No, the customer support team operates from Monday through Friday only."
+    },
+    {
+      "question": "What is the time zone for the customer support team's operating hours?",
+      "answer": "Eastern Standard Time (EST)."
+    },
+    {
+      "question": "What should a customer do if they have an urgent request outside of the support team's operating hours?",
+      "answer": "They can submit their request, and we’ll get back to them within 24 hours."
+    },
+    {
+      "question": "On which days of the week is the customer support team unavailable?",
+      "answer": "The customer support team is unavailable on Saturdays and Sundays."
+    },
+    {
+      "question": "Where can I find the tracking number for my order?",
+      "answer": "The tracking number for your order can be found in the 'Order History' section of your account after you log in. This section provides detailed information about your past orders, including their tracking numbers."
+    },
+    {
+      "question": "What happens if I lose the tracking link sent to my email?",
+      "answer": "If you lose the tracking link sent to your email, you can still track your order by logging into your account and checking the 'Order History' section for the tracking number. This ensures that you can still access your order's tracking information even without the email link." 
+    }
+  ],
+  "guardrails": [
+    {
+      "label": "customer_privacy",
+      "description": "Do not share any customer personal information or order details with unauthorized parties."
+    },
+    {
+      "label": "company_policy",
+      "description": "Do not make promises or commitments that are not part of our official policies."
+    }
+  ],
+  "format_answer": "Be professional and minimalistic in your response. stick with the facts and don't add any extra information.",
+  "tool_calls": [
+    {
+      "label": "get_product_details",
+      "description": "this tool is used to get the details of a product from the product database",
+      "api_call_config": {
+        "url": "https://api.example.com/orders/status",
+        "method": "GET",
+        "headers": {
+          "x-api-key": "your-api-key-here",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "order_id": "{{order_id}}"
+        }
+      },
+      "required_user_inputs": [
+        "order_id"
+      ]
+    }
+  ],
+  "user_input_collection": [
+    {
+      "label": "order_id",
+      "description": "Order number - unique identifier for each order. Format: alphanumeric without spaces."
+    },
+    {
+      "label": "email",
+      "description": "Customer email address for account verification."
+    }
+  ]
+}
