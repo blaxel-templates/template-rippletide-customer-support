@@ -32,7 +32,7 @@ cp agent_config.json.example agent_config.json
 # Edit agent_config.json with your configuration (optional)
 
 # Run setup to create your agent in Rippletide and evaluate it
-uv run src/setup_agent.py agent_config.json
+uv run src/setup_agent.py agent_config.json --pdf knowledge.pdf
 # This will output an Agent ID - add it to your .env file
 
 # Start the server
@@ -86,13 +86,6 @@ The script will:
 5. Get the agent's answer
 6. Evaluate the answer against the expected answer from the PDF
 7. Print the evaluation report
-
-### 3. Add Agent ID
-
-After setup, add to `.env`:
-```env
-RIPPLETIDE_AGENT_ID=your-agent-id-here
-```
 
 ## Toy Examples
 
