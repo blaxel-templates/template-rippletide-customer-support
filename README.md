@@ -87,7 +87,7 @@ bl chat --local template-rippletide-customer-support
 
 - **Python:** 3.10 or later
 - **[UV](https://github.com/astral-sh/uv):** An extremely fast Python package and project manager, written in Rust
-- **Rippletide API Key:** Contact [patrick@rippletide.com](mailto:patrick@rippletide.com) or [yann@rippletide.com](mailto:yann@rippletide.com) to get your API key
+- **Rippletide API Key:** Get it from [https://eval.rippletide.com](https://eval.rippletide.com)
   - The setup script will create your agent automatically
   - See the [Rippletide Getting Started guide](https://sdk.rippletide.com/documentation/get_started/) for more information
 - **Blaxel Platform Setup:** Complete Blaxel setup by following the [quickstart guide](https://docs.blaxel.ai/Get-started#quickstart)
@@ -114,7 +114,7 @@ uv sync
 
 ### Step 1: Get Your Rippletide API Key
 
-Contact [patrick@rippletide.com](mailto:patrick@rippletide.com) or [yann@rippletide.com](mailto:yann@rippletide.com) to get your Rippletide API key.
+Get your Rippletide API key at [https://eval.rippletide.com](https://eval.rippletide.com).
 
 Once you have your API key, create a `.env` file in the project root:
 
