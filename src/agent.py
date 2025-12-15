@@ -1,16 +1,21 @@
+import os
 import uuid
 import httpx
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
+from dotenv import load_dotenv
 from blaxel.telemetry.span import SpanManager
+
+# Load environment variables from .env file
+load_dotenv()
 
 router = APIRouter()
 
-# Hardcoded API key - update this with your API key from https://eval.rippletide.com
-RIPPLETIDE_API_KEY = "your-api-key-here"
-# Hardcoded Agent ID - update this with your agent ID
-RIPPLETIDE_AGENT_ID = "your-agent-id-here"
+# API key from environment variable
+RIPPLETIDE_API_KEY = os.getenv("RIPPLETIDE_API_KEY", "")
+# Agent ID from environment variable
+RIPPLETIDE_AGENT_ID = os.getenv("RIPPLETIDE_AGENT_ID", "")
 # Base URL for Rippletide API
 RIPPLETIDE_BASE_URL = "https://agent.rippletide.com/api/sdk"
 
@@ -19,10 +24,10 @@ class RequestInput(BaseModel):
 
 @router.post("/")
 async def handle_request(request: Request):
-    if RIPPLETIDE_API_KEY == "your-api-key-here":
-        raise HTTPException(status_code=500, detail="RIPPLETIDE_API_KEY is not configured. Please update it in agent.py")
-    if RIPPLETIDE_AGENT_ID == "your-agent-id-here":
-        raise HTTPException(status_code=500, detail="RIPPLETIDE_AGENT_ID is not configured. Please update it in agent.py")
+    if not RIPPLETIDE_API_KEY:
+        raise HTTPException(status_code=500, detail="RIPPLETIDE_API_KEY is not configured. Please set it in your .env file")
+    if not RIPPLETIDE_AGENT_ID:
+        raise HTTPException(status_code=500, detail="RIPPLETIDE_AGENT_ID is not configured. Please set it in your .env file")
 
     body = RequestInput(**await request.json())
 

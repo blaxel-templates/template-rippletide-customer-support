@@ -1,7 +1,7 @@
 # Customer Support Agent - Rippletide
 
 <p align="center">
-  <img style="border-radius:10px" src="img/cover.png" alt="Rippletide x Blaxel" width="90%"/>
+  <img style="border-radius:10px" src="cover.png" alt="Rippletide x Blaxel" width="90%"/>
 </p>
 
 <div align="center">
@@ -13,9 +13,30 @@
 
 </div>
 
-An intelligent customer support agent powered by Rippletide's enterprise-grade AI platform. This template creates an SDK agent, asks it questions, and evaluates the answers using Rippletide's evaluation system.
+An intelligent customer support agent powered by Rippletide's enterprise-grade AI platform and deployed on Blaxel. Use this template to create an SDK agent, extract questions from a PDF, evaluate answers, and ship a production-ready endpoint with near-zero hallucinations.
 
-## Quick Start
+## 📑 Table of Contents
+
+- [✨ Features](#-features)
+- [🚀 Quick Start](#-quick-start)
+- [📋 Prerequisites](#-prerequisites)
+- [💻 Installation](#-installation)
+- [🔧 Usage](#-usage)
+- [📁 Project Structure](#-project-structure)
+- [❓ Troubleshooting](#-troubleshooting)
+
+## ✨ Features
+
+- 🤖 **SDK Agent Creation** – Build governed Rippletide agents programmatically
+- 📄 **PDF Question Extraction** – Pull questions/answers from PDFs for evaluation
+- ✅ **Answer Evaluation** – Score outputs against expected answers with reports
+- 🔧 **Rich Configuration** – Q&A pairs, tool calls, guardrails, user inputs, state rules
+- 🚀 **Blaxel Deployment** – One-command deploy to a secure, low-latency runtime
+- 🔐 **Environment-Based Secrets** – `.env`-driven API keys and agent IDs
+- 🛡️ **Reliability & Safety** – Rippletide validation/authorization for <1% hallucinations
+- 🌐 **Production Endpoint** – Hosted HTTPS inference endpoint ready for your apps
+
+## 🚀 Quick Start
 
 ```bash
 # Clone the repository
@@ -27,75 +48,164 @@ cd template-rippletide-customer-support
 # Install dependencies
 uv sync
 
+# Set up environment variables
+cp .env.example .env
+# Edit .env and add your RIPPLETIDE_API_KEY (and later RIPPLETIDE_AGENT_ID)
+
 # Create SDK agent configuration
 cp agent_config.json.example agent_config.json
-# Edit agent_config.json with your configuration (optional)
 
 # Run setup to create your agent in Rippletide and evaluate it
 uv run src/setup_agent.py agent_config.json --pdf knowledge.pdf
-# This will output an Agent ID - add it to your .env file
+# This will output an Agent ID - add it to your .env file as RIPPLETIDE_AGENT_ID
 
 # Start the server
 bl serve --hotreload
 
 # In another terminal, test the agent
 bl chat --local template-rippletide-customer-support
+
+# Deploy to Blaxel (optional, when ready)
+bl deploy
 ```
 
-## Prerequisites
+## 📋 Prerequisites
 
 - **Python:** 3.10 or later
 - **[UV](https://github.com/astral-sh/uv):** An extremely fast Python package and project manager, written in Rust
-- **Rippletide API Key:** Go to [https://eval.rippletide.com](https://eval.rippletide.com), login, go to settings and get your API key.
-- **Blaxel Platform Setup:** Complete Blaxel setup by following the [quickstart guide](https://docs.blaxel.ai/Get-started#quickstart)
-  - **[Blaxel CLI](https://docs.blaxel.ai/Get-started):** Ensure you have the Blaxel CLI installed. If not, install it globally:
+- **Git** (to clone the template)
+- **Rippletide API Key:** Get it from [https://eval.rippletide.com](https://eval.rippletide.com) → Settings.
+- **Blaxel Account & CLI:** Follow the [quickstart guide](https://docs.blaxel.ai/Get-started#quickstart).
+  - Install CLI:
     ```bash
     curl -fsSL https://raw.githubusercontent.com/blaxel-ai/toolkit/main/install.sh | BINDIR=/usr/local/bin sudo -E sh
     ```
-  - **Blaxel login:** Login to Blaxel platform
+  - Login:
     ```bash
     bl login
     ```
+- Optional: Basic JSON knowledge, REST API familiarity
 
-## Configuration
+## 💻 Installation
 
-### 1. Get Your API Key
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/blaxel-ai/template-rippletide-customer-support.git
+   cd template-rippletide-customer-support
+   ```
 
-1. Go to [https://eval.rippletide.com](https://eval.rippletide.com), login, go to settings and generate your API key
-2. Update the hardcoded API key in these files:
-   - `src/setup_agent.py` - Update `RIPPLETIDE_API_KEY = ""`
-   - `src/agent.py` - Update `RIPPLETIDE_API_KEY = "your-api-key-here"`
+2. **Install dependencies:**
+   ```bash
+   uv sync
+   ```
 
-### 2. Create and Evaluate Agent
+3. **Set up environment variables:**
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Edit `.env` and add your credentials:
+   ```env
+   RIPPLETIDE_API_KEY=your-api-key-here
+   RIPPLETIDE_AGENT_ID=your-agent-id-here
+   ```
 
-The setup script creates an SDK agent, extracts questions from a PDF, asks the agent each question, and evaluates all answers:
+4. **Configure your agent:**
+   ```bash
+   cp agent_config.json.example agent_config.json
+   # Edit agent_config.json with your configuration (optional)
+   ```
+
+## 🔧 Usage
+
+### Configure your environment
+
+1) Get your API key: [https://eval.rippletide.com](https://eval.rippletide.com) → Settings → Generate key  
+2) Add it to `.env`: `RIPPLETIDE_API_KEY=your-api-key`  
+3) Run setup (below) and add the emitted Agent ID to `.env`: `RIPPLETIDE_AGENT_ID=your-agent-id`
+
+### Understand `agent_config.json`
+
+- `agent_purpose`: Main prompt describing the agent’s role
+- `qa_pairs`: Ground-truth Q&A for knowledge
+- `guardrails`: Rules/constraints for safe answers
+- `tool_calls`: External API calls the agent can trigger
+- `user_input_collection`: Inputs to gather from users
+- `format_answer`: Response formatting instructions
+- `state_predicate`: Rules for ending/transitioning conversations
+
+Edit `agent_config.json` to customize behavior.
+
+### Create and evaluate your Rippletide agent
 
 ```bash
 cp agent_config.json.example agent_config.json
-# Edit agent_config.json with your config (optional)
+# (Optional) customize the file
 
-# Run setup with PDF (required)
 uv run src/setup_agent.py agent_config.json --pdf knowledge.pdf
 ```
 
-The script will:
-1. Create an SDK agent using your configuration
-2. Create an evaluation agent
-3. Extract questions and expected answers from the PDF
-4. Ask the SDK agent the first question from the PDF
-5. Get the agent's answer
-6. Evaluate the answer against the expected answer from the PDF
-7. Print the evaluation report
+This script:
+1) Loads your configuration  
+2) Creates a new SDK agent in Rippletide  
+3) Configures Q&A, tool calls, guardrails, user inputs  
+4) Creates an evaluation agent  
+5) Extracts questions/expected answers from the PDF  
+6) Asks the SDK agent the first question  
+7) Evaluates the answer vs. the expected answer  
+8) Prints the evaluation report and outputs an Agent ID
 
-## Toy Examples
+### Run locally with Blaxel
 
-### Example 1: Simple SDK Agent
+```bash
+bl serve --hotreload
+bl chat --local template-rippletide-customer-support
+```
+
+### Deploy to production
+
+```bash
+bl deploy
+```
+
+Blaxel will build and deploy your project and expose a hosted endpoint, e.g.:
+`https://run.blaxel.ai/{YOUR-WORKSPACE}/agents/{YOUR-AGENT}`
+
+### Call your deployed agent
+
+```bash
+curl -X POST https://run.blaxel.ai/YOUR-WORKSPACE/agents/YOUR-AGENT \
+  -H "Content-Type: application/json" \
+  -H 'X-Blaxel-Authorization: Bearer YOUR-TOKEN' \
+  -H 'X-Blaxel-Workspace: YOUR-WORKSPACE' \
+  -d '{
+    "message": "Hi, I need help with my recent order.",
+    "user_id": "customer_123"
+  }'
+```
+
+Request flow: input → LLM intent → Rippletide validation/authorization → safe action → runtime execution → response.
+
+### Extend your agent
+
+Use `agent_config.json` to add:
+- Multi-step workflows, eligibility checks, refunds, troubleshooting trees
+- Multi-language support, routing (tier 1 → tier 2), escalation rules
+- Form-filling and state-aware conversations
+
+### Code Examples
+
+#### Example 1: Simple SDK Agent
 
 ```python
 from src.rippletide_client import RippletideAgent
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Initialize
-agent = RippletideAgent(api_key="your-api-key")
+agent = RippletideAgent(api_key=os.getenv("RIPPLETIDE_API_KEY"))
 
 # Create agent
 agent_data = agent.create_agent(
@@ -127,12 +237,16 @@ response = agent.chat("What is a teddy bear?")
 print(response["answer"])
 ```
 
-### Example 2: SDK Agent with Tool Calls
+#### Example 2: SDK Agent with Tool Calls
 
 ```python
 from src.rippletide_client import RippletideAgent
+import os
+from dotenv import load_dotenv
 
-agent = RippletideAgent(api_key="your-api-key")
+load_dotenv()
+
+agent = RippletideAgent(api_key=os.getenv("RIPPLETIDE_API_KEY"))
 agent_data = agent.create_agent(
     name="Order Status Agent",
     prompt="You help customers check their order status."
@@ -178,13 +292,17 @@ agent.setup_agent_knowledge(agent_data["id"], config)
 response = agent.chat("What's the status of order 12345?")
 ```
 
-### Example 3: Creating and Evaluating an Agent with PDF
+#### Example 3: Creating and Evaluating an Agent with PDF
 
 ```python
 from src.rippletide_client import RippletideAgent, RippletideEvalClient
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Step 1: Create SDK agent
-agent = RippletideAgent(api_key="your-api-key")
+agent = RippletideAgent(api_key=os.getenv("RIPPLETIDE_API_KEY"))
 agent_data = agent.create_agent(
     name="Customer Support Agent",
     prompt="You are a helpful customer support agent."
@@ -204,8 +322,8 @@ agent.setup_agent_knowledge(agent_data["id"], config)
 
 # Step 2: Create eval agent and extract questions from PDF
 eval_client = RippletideEvalClient(
-    api_key="your-api-key",
-    base_url="https://rippletide-backend-staging-gqdsh7h8drgfazdj.westeurope-01.azurewebsites.net"
+    api_key=os.getenv("RIPPLETIDE_API_KEY"),
+    base_url="https://rippletide-backend.azurewebsites.net"
 )
 
 eval_agent = eval_client.create_agent(name="Evaluation Agent")
@@ -239,19 +357,10 @@ if qa_pairs:
     print(f"Justification: {report['justification']}")
 ```
 
-### Example 4: Using the Setup Script
-
-```bash
-# Extract questions from PDF and evaluate all of them
-uv run src/setup_agent.py agent_config.json --pdf knowledge.pdf
-```
-
-The script will extract questions and expected answers from the PDF, ask the first question to the SDK agent, and evaluate the answer.
-
 ## 📁 Project Structure
 
 ```
-blaxel/
+blaxel-rippletide/
 ├── src/
 │   ├── rippletide_client.py   # RippletideAgent & RippletideEvalClient
 │   ├── setup_agent.py          # Unified agent setup and evaluation script
@@ -259,29 +368,43 @@ blaxel/
 │   ├── main.py                 # FastAPI app
 │   └── middleware.py           # Request middleware
 ├── agent_config.json.example   # Agent config template
-├── pyproject.toml
+├── .env.example                # Environment variables template
+├── pyproject.toml              # Python project configuration
+├── blaxel.toml                 # Blaxel configuration
+├── cover.png                   # README cover image
+├── icon.png                    # Branding asset
+├── icon-dark.png               # Branding asset
 └── README.md
 ```
 
-## Usage
+## ❓ Troubleshooting
 
-### Running Locally
+### API key / agent ID
+- Ensure `.env` exists with `RIPPLETIDE_API_KEY` and `RIPPLETIDE_AGENT_ID`.
+- Re-run setup to regenerate the Agent ID if needed:
+  ```bash
+  uv run src/setup_agent.py agent_config.json --pdf knowledge.pdf
+  ```
 
-```bash
-bl serve --hotreload
-```
+### Agent fails to create
+- Confirm `RIPPLETIDE_API_KEY` is set and valid.
+- Verify the PDF path is correct and readable.
 
-### Testing
+### No questions extracted from PDF
+- Make sure the PDF has extractable Q&A pairs.
+- Check the `--pdf` path.
+- The script will fallback to test prompts if extraction is empty.
 
-```bash
-bl chat --local template-rippletide-customer-support
-```
+### Blaxel CLI issues
+- `bl: command not found` → install the CLI (see Prerequisites) and run `bl login`.
+- Deploy errors → retry `bl auth login`, then `bl deploy`.
 
-### Deployment
+### Endpoint errors
+- Test locally first: `bl serve --hotreload` and `bl chat --local template-rippletide-customer-support`.
+- Check that `.env` is populated and the server port is free.
 
-```bash
-bl deploy
-```
+### Import errors (e.g., `dotenv`)
+- Install deps: `uv sync` (python-dotenv is included in `pyproject.toml`).
 
 ## Support
 

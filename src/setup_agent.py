@@ -11,17 +11,22 @@ Usage:
 
 import sys
 import json
+import os
 import argparse
 from pathlib import Path
 from typing import Any
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.rippletide_client import RippletideAgent, RippletideEvalClient
 
-# Hardcoded API key - update this with your API key from https://eval.rippletide.com
-RIPPLETIDE_API_KEY = ""
+# API key from environment variable
+RIPPLETIDE_API_KEY = os.getenv("RIPPLETIDE_API_KEY", "")
 # URL for evaluation API
 RIPPLETIDE_EVAL_BASE_URL = "https://rippletide-backend.azurewebsites.net"
 
@@ -47,8 +52,8 @@ def main():
     
     args = parser.parse_args()
     
-    if RIPPLETIDE_API_KEY == "":
-        print("Error: API key not configured. Please update RIPPLETIDE_API_KEY in setup_agent.py", file=sys.stderr)
+    if not RIPPLETIDE_API_KEY:
+        print("Error: API key not configured. Please set RIPPLETIDE_API_KEY in your .env file", file=sys.stderr)
         sys.exit(1)
     
     config_path = Path(args.config)
