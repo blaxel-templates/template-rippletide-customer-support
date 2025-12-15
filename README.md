@@ -27,14 +27,14 @@ An intelligent customer support agent powered by Rippletide's enterprise-grade A
 
 ## ✨ Features
 
-- 🤖 **SDK Agent Creation** – Build governed Rippletide agents programmatically
-- 📄 **PDF Question Extraction** – Pull questions/answers from PDFs for evaluation
-- ✅ **Answer Evaluation** – Score outputs against expected answers with reports
-- 🔧 **Rich Configuration** – Q&A pairs, tool calls, guardrails, user inputs, state rules
-- 🚀 **Blaxel Deployment** – One-command deploy to a secure, low-latency runtime
-- 🔐 **Environment-Based Secrets** – `.env`-driven API keys and agent IDs
-- 🛡️ **Reliability & Safety** – Rippletide validation/authorization for <1% hallucinations
-- 🌐 **Production Endpoint** – Hosted HTTPS inference endpoint ready for your apps
+- **SDK Agent Creation** – Build governed Rippletide agents programmatically
+- **PDF Question Extraction** – Pull questions/answers from PDFs for evaluation
+- **Answer Evaluation** – Score outputs against expected answers with reports
+- **Rich Configuration** – Q&A pairs, tool calls, guardrails, user inputs, state rules
+- **Blaxel Deployment** – One-command deploy to a secure, low-latency runtime
+- **Environment-Based Secrets** – `.env`-driven API keys and agent IDs
+- **Reliability & Safety** – Rippletide validation/authorization for <1% hallucinations
+- **Production Endpoint** – Hosted HTTPS inference endpoint ready for your apps
 
 ## 🚀 Quick Start
 
