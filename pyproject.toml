@@ -28,3 +28,7 @@ skip-magic-trailing-comma = false
 
 [tool.ruff.lint]
 select = ["E", "F"]
+
+[tool.uv]
+# blaxel 0.2.x predates mcp 2; fastapi 0.137+ breaks its pinned opentelemetry-instrumentation-fastapi 0.55b0 on include_router
+constraint-dependencies = ["mcp<2", "fastapi<0.137"]
