@@ -10,12 +10,6 @@ resolution-markers = [
     "python_full_version == '3.13.*' and sys_platform != 'win32'",
 ]
 
-[manifest]
-constraints = [
-    { name = "fastapi", specifier = "<0.137" },
-    { name = "mcp", specifier = "<2" },
-]
-
 [[package]]
 name = "agent-detector"
 version = "2.0.0"
@@ -93,10 +87,11 @@ wheels = [
 
 [[package]]
 name = "blaxel"
-version = "0.2.39"
+version = "0.4.18"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
+    { name = "dockerfile-parse" },
     { name = "httpx" },
     { name = "mcp" },
     { name = "pydantic" },
@@ -107,9 +102,9 @@ dependencies = [
     { name = "tomli" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bd/a3/bc609bede377f6773412db4bee2aebc0d8c5a0618d9e8b0109cb5d31c9a2/blaxel-0.2.39.tar.gz", hash = "sha256:d645487fa385f347e8a550ae8eef06cfce8a5f1986d02679e558a4c8fc73e6f7", size = 443667, upload-time = "2026-02-06T01:23:30.578Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7e/76/63215ef89ee9ed2ec8726b7171a0ec60cf7bf69b606ebcea7ce85336c18f/blaxel-0.4.18.tar.gz", hash = "sha256:77f23b3b5771e0bfc512c94692c8d1b6d10845d7cac1ae24a66bedd08c25a146", size = 628412, upload-time = "2026-10-15T22:04:41.255Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a9/f9/8f56954799767456a45485e895c735b72fbf4e917ddc6790cb1220a38a4b/blaxel-0.2.39-py3-none-any.whl", hash = "sha256:f5cac3763588834e0ded62c5f48128bf6eb59b696ba52b26eee44413893926e7", size = 515749, upload-time = "2026-02-06T01:23:32.487Z" },
+    { url = "https://files.pythonhosted.org/packages/67/fb/8594a0377742f1918994f067261ad160b32d18ef9dff0912c9a063a4152c/blaxel-0.4.18-py3-none-any.whl", hash = "sha256:a6ed0c49798c21933e842cb9baba268a242bf7a4db6ecd411f48457f47933095", size = 896951, upload-time = "2026-10-15T22:04:39.267Z" },
 ]
 
 [package.optional-dependencies]
@@ -422,6 +417,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/b5/4a/263763cb2ba3816dd94b08ad3a33d5fdae34ecb856678773cc40a3605829/dnspython-2.7.0.tar.gz", hash = "sha256:ce9c432eda0dc91cf618a5cedf1a4e142651196bbcd2c80e89ed5a907e5cfaf1", size = 345197, upload-time = "2024-10-05T20:14:59.362Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/68/1b/e0a87d256e40e8c888847551b20a017a6b98139178505dc7ffb96f04e954/dnspython-2.7.0-py3-none-any.whl", hash = "sha256:b4c34b7d10b51bcc3a5071e7b8dee77939f1e878477eeecc965e9835f63c6c86", size = 313632, upload-time = "2024-10-05T20:14:57.687Z" },
+]
+
+[[package]]
+name = "dockerfile-parse"
+version = "2.0.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/92/df/929ee0b5d2c8bd8d713c45e71b94ab57c7e11e322130724d54f469b2cd48/dockerfile-parse-2.0.1.tar.gz", hash = "sha256:3184ccdc513221983e503ac00e1aa504a2aa8f84e5de673c46b0b6eee99ec7bc", size = 24556, upload-time = "2023-07-18T13:36:07.897Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7a/6c/79cd5bc1b880d8c1a9a5550aa8dacd57353fa3bb2457227e1fb47383eb49/dockerfile_parse-2.0.1-py2.py3-none-any.whl", hash = "sha256:bdffd126d2eb26acf1066acb54cb2e336682e1d72b974a40894fac76a4df17f6", size = 14845, upload-time = "2023-07-18T13:36:06.052Z" },
 ]
 
 [[package]]
@@ -1960,7 +1964,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "asgi-correlation-id", specifier = ">=4.3.4" },
-    { name = "blaxel", extras = ["telemetry"], specifier = "==0.2.39" },
+    { name = "blaxel", extras = ["telemetry"], specifier = "==0.4.18" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.115.12" },
     { name = "httpx", specifier = ">=0.27.0" },
     { name = "markdown", specifier = ">=3.8.2" },
